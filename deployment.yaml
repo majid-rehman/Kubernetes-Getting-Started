@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: devops-test-majid
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: devops-test
+    spec:
+      containers:
+      - name: devops-test
+        image: majidbangash/devops-test
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8083
