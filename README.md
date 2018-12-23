@@ -58,7 +58,7 @@ We have simple node server with index.js and package.json running on `port 8083`
 
 # Automation
 
-    chmod +x docker-autowork.sh
+    chmod +x docker-deploy.sh
 
 **You can pass these arguments** 
 
@@ -78,9 +78,9 @@ We have simple node server with index.js and package.json running on `port 8083`
  
  
 
-       ./docker-autowork.sh -b=majid --image=devops-test -t=latest
+       ./docker-deploy.sh -b=majid --image=devops-test -t=latest
   ###### TERMINAL OUTPUT
-        Locopixel-MAC-06:DevOps-Test-Majid admin$ ./docker-autowork.sh -b=majid --image=devops-test -t=latest
+        Locopixel-MAC-06:DevOps-Test-Majid admin$ ./docker-deploy.sh -b=majid --image=devops-test -t=latest
         buil action specfied
         Docker Image to process: 
         Using docker tag: latest
@@ -95,7 +95,7 @@ We have simple node server with index.js and package.json running on `port 8083`
         Step 3/9 : RUN apk add --update nodejs bash git
          ---> Using cache
          ---> 7fe7a59caf23
-        Step 4/9 : COPY . /www
+        Step 4/9 : COPY application /www
          ---> Using cache
          ---> dddd1b27a876
         Step 5/9 : RUN cd /www; npm install
@@ -118,9 +118,9 @@ We have simple node server with index.js and package.json running on `port 8083`
 # Run container
 
 
-    ./docker-autowork.sh -r=majid --image=devops-test -t=latest
+    ./docker-deploy.sh -r=majid --image=devops-test -t=latest
  ###### TERMINAL OUTPUT
-    Locopixel-MAC-06:DevOps-Test-Majid admin$ ./docker-autowork.sh -r=majid --image=devops-test -t=latest
+    Locopixel-MAC-06:DevOps-Test-Majid admin$ ./docker-deploy.sh -r=majid --image=devops-test -t=latest
     run action specfied
     Docker Image to process: 
     Using docker tag: latest
@@ -135,9 +135,9 @@ We have simple node server with index.js and package.json running on `port 8083`
 
 # Push Image
 
-    ./docker-autowork.sh -p=devops-test --image=devops-test -t=latest
+    ./docker-deploy.sh -p=devops-test --image=devops-test -t=latest
 ###### TERMINAL OUTPUT
-    Locopixel-MAC-06:DevOps-Test-Majid admin$ ./docker-autowork.sh -p=devops-test --image=devops-test -t=latest
+    Locopixel-MAC-06:DevOps-Test-Majid admin$ ./docker-deploy.sh -p=devops-test --image=devops-test -t=latest
     push action specfied
     Docker Image to process: 
     Using docker tag: latest
