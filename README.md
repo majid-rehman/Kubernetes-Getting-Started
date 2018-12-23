@@ -160,7 +160,7 @@ We have simple node server with index.js and package.json running on `port 8083`
 # Kubernetes Deployments & Services Creatation
 
 **To deploy your deployment, run**
-# Create deployment.yaml
+###### Create deployment.yaml
     Locopixel-MAC-06:DevOps-Test-Majid admin$ vi deployment.yaml
 ######
     kubectl create -f deployment.yaml
@@ -178,7 +178,7 @@ We have simple node server with index.js and package.json running on `port 8083`
     devops-test-majid   1         1         1            1           1d
 
 **Now we can create the service within Kubernetes**
-# Create service.yaml
+###### Create service.yaml
     Locopixel-MAC-06:DevOps-Test-Majid admin$ vi service.yaml
 ######
     kubectl create -f service.yaml
