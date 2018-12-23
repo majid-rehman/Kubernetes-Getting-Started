@@ -85,42 +85,35 @@ We have simple node server with index.js and package.json running on `port 8083`
         Using docker tag: latest
         ENVIRONMENT is devops-test
         build -t majidbangash/devops-test:latest .
-        Sending build context to Docker daemon  223.2kB
-        Step 1/10 : FROM alpine:3.7
+        Sending build context to Docker daemon  224.3kB
+        Step 1/9 : FROM alpine:3.7
          ---> 9bea9e12e381
-        Step 2/10 : LABEL authors="majid Rehman <majid.rehman@locopixel.com>"
+        Step 2/9 : LABEL authors="majid Rehman <majid.rehman@locopixel.com>"
          ---> Using cache
          ---> 92b3e1e493e5
-        Step 3/10 : RUN apk add --update nodejs bash git
+        Step 3/9 : RUN apk add --update nodejs bash git
          ---> Using cache
          ---> 7fe7a59caf23
-        Step 4/10 : COPY package.json /www/package.json
+        Step 4/9 : COPY . /www
          ---> Using cache
-         ---> 5d33a4894a91
-        Step 5/10 : RUN cd /www; npm install
+         ---> dddd1b27a876
+        Step 5/9 : RUN cd /www; npm install
          ---> Using cache
-         ---> bd7e83d5bd7d
-        Step 6/10 : COPY . /www
-         ---> e9e95264c4eb
-        Step 7/10 : WORKDIR /www
-         ---> Running in a0a9bc410be5
-        Removing intermediate container a0a9bc410be5
-         ---> c5678b847932
-        Step 8/10 : ENV PORT 8083
-         ---> Running in 4000d25a0787
-        Removing intermediate container 4000d25a0787
-         ---> 22384c5a819a
-        Step 9/10 : EXPOSE  8083
-         ---> Running in ae2dded24450
-        Removing intermediate container ae2dded24450
-         ---> 16bba2544814
-        Step 10/10 : CMD npm run start
-         ---> Running in 2507defd5e3f
-        Removing intermediate container 2507defd5e3f
-         ---> 263d1645db0b
-        Successfully built 263d1645db0b
+         ---> 4b6a5fda4b6c
+        Step 6/9 : WORKDIR /www
+         ---> Using cache
+         ---> fea9c15a4251
+        Step 7/9 : ENV NODE_ENV production
+         ---> Using cache
+         ---> b3413ca3472a
+        Step 8/9 : EXPOSE  8083
+         ---> Using cache
+         ---> 992f18b31296
+        Step 9/9 : CMD npm run start
+         ---> Using cache
+         ---> d1f75d29eefd
+        Successfully built d1f75d29eefd
         Successfully tagged majidbangash/devops-test:latest
-
 # Run container
 
 
