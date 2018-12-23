@@ -5,10 +5,11 @@
 
     cd DevOps-Test-Majid
 
-# Docker Environment Setup
+# Kubernetes (minikube) Environment Setup
+ - You must have Docker installed on your system
  - Once you get in to this repository your first task will be to download Virtual Box from below link according to your OS .
-https://www.virtualbox.org/wiki/Downloads
-- After Virtual Box successful installion it's time to set Kubernetes Environment (minikube dashboard) by executing the script ,one command and your environment is ready , No need to download Prerequisit one by one . 
+   https://www.virtualbox.org/wiki/Downloads
+ - After Virtual Box successful installion it's time to set Kubernetes Environment (minikube dashboard) by executing the          script ,one command and your environment is ready , No need to download Prerequisit one by one . 
 - 
 
     chmod +x kubectl-minikube-intall-with-script.sh
