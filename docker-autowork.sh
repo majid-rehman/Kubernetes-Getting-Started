@@ -1,6 +1,6 @@
 #!/bin/bash
 # Author: Majid
-# Github: url
+# Github: https://github.com/majidkhan138/DevOps-Test-Majid
 # Description: Docker build,push and run script to aumate you development and testing
 
 #Variable section
