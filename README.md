@@ -18,12 +18,35 @@ https://www.virtualbox.org/wiki/Downloads
 if not you can try this it will start minikube dashboard .**
 
     minikube start
+  ###### TERMINAL OUTPUT
+    Locopixel-MAC-06:DevOps-Test-Majid admin$ minikube start
+    Starting local Kubernetes cluster...
+    Kubectl is now configured to use the cluster.
+  ######
     minikube dashboard
+  ###### TERMINAL OUTPUT
+    Locopixel-MAC-06:DevOps-Test-Majid admin$ minikube dashboard
+    Opening kubernetes dashboard in default browser...
 
 **When minikube starts, it will automatically set the context for kubectl. Run these commands to check nodes and pods**
 
     kubectl get nodes
+    
+   ###### TERMINAL OUTPUT
+    Locopixel-MAC-06:DevOps-Test-Majid admin$ kubectl get nodes
+    NAME       STATUS    AGE
+    minikube   Ready     1d
+    
+  ######
     kubectl get pods --all-namespaces
+  
+  ###### TERMINAL OUTPUT
+    Locopixel-MAC-06:DevOps-Test-Majid admin$ kubectl get pods --all-namespaces
+    NAMESPACE     NAME                                 READY     STATUS    RESTARTS   AGE
+    default       devops-test-majid-1846920755-g0w5w   1/1       Running   0          1d
+    kube-system   kube-addon-manager-minikube          1/1       Running   1          1d
+    kube-system   kube-dns-v20-2ddpk                   3/3       Running   1          1d
+    kube-system   kubernetes-dashboard-wzp59           1/1       Running   0          1d
 
 **All set for Kubernetes Now let's deploy our node server to kubernetes (minikube).**
 
@@ -55,19 +78,84 @@ We have simple node server with index.js and package.json running on `port 8083`
  
 
        ./docker-autowork.sh -b=majid --image=devops-test -t=latest
+  ###### TERMINAL OUTPUT
+        Locopixel-MAC-06:DevOps-Test-Majid admin$ ./docker-autowork.sh -b=majid --image=devops-test -t=latest
+        buil action specfied
+        Docker Image to process: 
+        Using docker tag: latest
+        ENVIRONMENT is devops-test
+        build -t majidbangash/devops-test:latest .
+        Sending build context to Docker daemon  223.2kB
+        Step 1/10 : FROM alpine:3.7
+         ---> 9bea9e12e381
+        Step 2/10 : LABEL authors="majid Rehman <majid.rehman@locopixel.com>"
+         ---> Using cache
+         ---> 92b3e1e493e5
+        Step 3/10 : RUN apk add --update nodejs bash git
+         ---> Using cache
+         ---> 7fe7a59caf23
+        Step 4/10 : COPY package.json /www/package.json
+         ---> Using cache
+         ---> 5d33a4894a91
+        Step 5/10 : RUN cd /www; npm install
+         ---> Using cache
+         ---> bd7e83d5bd7d
+        Step 6/10 : COPY . /www
+         ---> e9e95264c4eb
+        Step 7/10 : WORKDIR /www
+         ---> Running in a0a9bc410be5
+        Removing intermediate container a0a9bc410be5
+         ---> c5678b847932
+        Step 8/10 : ENV PORT 8083
+         ---> Running in 4000d25a0787
+        Removing intermediate container 4000d25a0787
+         ---> 22384c5a819a
+        Step 9/10 : EXPOSE  8083
+         ---> Running in ae2dded24450
+        Removing intermediate container ae2dded24450
+         ---> 16bba2544814
+        Step 10/10 : CMD npm run start
+         ---> Running in 2507defd5e3f
+        Removing intermediate container 2507defd5e3f
+         ---> 263d1645db0b
+        Successfully built 263d1645db0b
+        Successfully tagged majidbangash/devops-test:latest
 
 # Run container
 
 
     ./docker-autowork.sh -r=majid --image=devops-test -t=latest
-
-  
+ ###### TERMINAL OUTPUT
+    Locopixel-MAC-06:DevOps-Test-Majid admin$ ./docker-autowork.sh -r=majid --image=devops-test -t=latest
+    run action specfied
+    Docker Image to process: 
+    Using docker tag: latest
+    ENVIRONMENT is devops-test
+    Container is already running. do you want to stop and run new one (y/n)? y
+    majid
+    majid
+    run --name majid -d -p 9000:8083 majidbangash/devops-test:latest
+    0e10d231c1d85e55637c1b5a09343f40905316702d5749faf96f4e99606df974
 
 >If container is already in running state , it will ask for to stop that conatiner and run new one with **Yes or No** if type Yes your container will start and you will be able to access it from localhost:9000
 
 # Push Image
 
     ./docker-autowork.sh -p=devops-test --image=devops-test -t=latest
+###### TERMINAL OUTPUT
+    Locopixel-MAC-06:DevOps-Test-Majid admin$ ./docker-autowork.sh -p=devops-test --image=devops-test -t=latest
+    push action specfied
+    Docker Image to process: 
+    Using docker tag: latest
+    ENVIRONMENT is devops-test
+    push majidbangash/devops-test:latest
+    The push refers to repository [docker.io/majidbangash/devops-test]
+    f9d6006d8efb: Pushed 
+    e6dd5913d603: Pushed 
+    c936333841e6: Pushed 
+    27396fdd2b2b: Pushed 
+    d6da3c54c8f3: Mounted from library/alpine 
+    latest: digest: sha256:52b34a5bb2d59bc893780a499e9fe6922056c3e3bb6fc1874238278eb562589f size: 1367
 
 > Note - since k8s is running in it's own virtual machine, it doesn't
 > have access to Docker images that you build. In order  to proceed with
@@ -79,24 +167,49 @@ We have simple node server with index.js and package.json running on `port 8083`
 # Kubernetes Deployments & Services Creatation
 
 **To deploy your deployment, run**
+# Create deployment.yaml
+    Locopixel-MAC-06:DevOps-Test-Majid admin$ vi deployment.yaml
+######
+    kubectl create -f deployment.yaml
+###### TERMINAL OUTPUT
+    Locopixel-MAC-06:DevOps-Test-Majid admin$ kubectl create -f deployment.yaml
+    deployment "devops-test-majid" created
 
-    kubectl create -f deployment.yam
 
 **To get your deployment with kubectl, run**
 
     kubectl get deployments
+###### TERMINAL OUTPUT
+    Locopixel-MAC-06:DevOps-Test-Majid admin$ kubectl get deployments
+    NAME                DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+    devops-test-majid   1         1         1            1           1d
 
 **Now we can create the service within Kubernetes**
-
+# Create service.yaml
+    Locopixel-MAC-06:DevOps-Test-Majid admin$ vi service.yaml
+######
     kubectl create -f service.yaml
+###### TERMINAL OUTPUT
+    Locopixel-MAC-06:DevOps-Test-Majid admin$ vi service.yaml
+    Locopixel-MAC-06:DevOps-Test-Majid admin$ kubectl create -f service.yaml
+    service "devops-test-majid" created
 
 **And we can get the details by running**
 
     kubectl get services
+###### TERMINAL OUTPUT
+    Locopixel-MAC-06:DevOps-Test-Majid admin$ kubectl get services
+    NAME                CLUSTER-IP   EXTERNAL-IP   PORT(S)          AGE
+    devops-test-majid   10.0.0.127   <pending>     8083:30001/TCP   1d
+    kubernetes          10.0.0.1     <none>        443/TCP          1d
 
 ***# you can run this command which will return the current IP address.***
 
     minikube ip
+###### TERMINAL OUTPUT
+    Locopixel-MAC-06:DevOps-Test-Majid admin$ minikube ip
+    192.168.99.102
+
 
 # To access your service, simply curl the IP on port 3001
 
