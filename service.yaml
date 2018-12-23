@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: devops-test-majid
   labels:
-    app: devops
+    app: devops-test
 spec:
   selector:
     app: devops-test
