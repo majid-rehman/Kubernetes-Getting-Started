@@ -8,7 +8,7 @@ LABEL authors="majid Rehman <majid.rehman@locopixel.com>"
 RUN apk add --update nodejs bash git
 # Install app dependencies
 
-COPY . /www
+COPY application /www
 
 RUN cd /www; npm install
 
