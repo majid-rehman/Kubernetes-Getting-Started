@@ -158,7 +158,7 @@ We have simple node server with index.js and package.json running on `port 8083`
 
 .
 
-# Kubernetes Deployments & Services Creatation
+# Kubernetes Deployments & Services Creation
 
 **To deploy your deployment, run**
 ###### Create deployment.yaml
