@@ -1,4 +1,4 @@
-# DevOps-Test-Majid
+# Kubernetes Getting Started (Minikube)
 # Usage 
 
     git clone https://github.com/majidkhan138/DevOps-Test-Majid.git
